@@ -3,7 +3,7 @@ class HTMLNode():
         self.tag = tag
         self.value = value
         self.children = children
-        self.props = props
+        self.props = props if props else None
 
     def to_html(self):
         raise NotImplementedError
@@ -17,6 +17,11 @@ class HTMLNode():
     
     def __repr__(self) -> str:
         return f"HTMLNode({self.tag}, {self.value}, children: {self.children}, {self.props})"
+
+    def __eq__(self, object) -> bool:
+        return self.tag == object.tag and self.value == object.value and self.children == object.children and self.props == object.props
+
+
 
 class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
